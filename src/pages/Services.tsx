@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { ServiceCard } from "@/components/ServiceCard";
 import { Calendar } from "@/components/Calendar";
@@ -38,7 +37,7 @@ export default function Services() {
             <ServiceCard
               title="Corte + Barba"
               price="R$ 70"
-              icon="cut"
+              icon="scissors2"
               isSelected={selectedService === "combo"}
               onClick={() => setSelectedService("combo")}
             />

@@ -1,12 +1,12 @@
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Scissors, SprayCan, Cut } from "lucide-react";
+import { Scissors, SprayCan, Scissors2 } from "lucide-react";
 
 interface ServiceCardProps {
   title: string;
   price: string;
-  icon: "scissors" | "spray-can" | "cut";
+  icon: "scissors" | "spray-can" | "scissors2";
   isSelected: boolean;
   onClick: () => void;
 }
@@ -14,7 +14,7 @@ interface ServiceCardProps {
 const icons = {
   scissors: Scissors,
   "spray-can": SprayCan,
-  cut: Cut,
+  scissors2: Scissors2,
 };
 
 export function ServiceCard({ title, price, icon, isSelected, onClick }: ServiceCardProps) {
