@@ -5,6 +5,12 @@ import { Apple, Mail } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Login() {
+  const navigate = useNavigate();
+
+  const handleLoginSuccess = () => {
+    navigate("/services");
+  };
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <div className="flex justify-end p-4">
@@ -28,7 +34,10 @@ export default function Login() {
           <div className="mt-8 space-y-6">
             <div className="space-y-4">
               <Input type="email" placeholder="Seu email" className="w-full" />
-              <Button className="w-full bg-primary hover:bg-primary/90">
+              <Button 
+                className="w-full bg-primary hover:bg-primary/90"
+                onClick={handleLoginSuccess}
+              >
                 <Mail className="w-4 h-4 mr-2" />
                 Entrar com Email
               </Button>
