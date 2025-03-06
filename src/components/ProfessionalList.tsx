@@ -2,10 +2,18 @@
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { User } from "lucide-react";
+import { ArrowRight, User } from "lucide-react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface ProfessionalListProps {
   selectedDate: Date;
+}
+
+interface Professional {
+  id: number;
+  name: string;
+  availableTimes: string[];
 }
 
 const professionals = [
@@ -15,6 +23,25 @@ const professionals = [
 ];
 
 export function ProfessionalList({ selectedDate }: ProfessionalListProps) {
+  const [selectedProfessional, setSelectedProfessional] = useState<Professional | null>(null);
+  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  const handleTimeSelect = (professional: Professional, time: string) => {
+    setSelectedProfessional(professional);
+    setSelectedTime(time);
+  };
+
+  const handleSchedule = () => {
+    navigate("/booking-confirmation", { 
+      state: { 
+        professional: selectedProfessional,
+        date: selectedDate,
+        time: selectedTime
+      } 
+    });
+  };
+
   return (
     <div className="space-y-4">
       <h3 className="text-lg font-medium">
@@ -36,8 +63,9 @@ export function ProfessionalList({ selectedDate }: ProfessionalListProps) {
               {professional.availableTimes.map((time) => (
                 <Button
                   key={time}
-                  variant="outline"
+                  variant={selectedProfessional?.id === professional.id && selectedTime === time ? "default" : "outline"}
                   className="text-sm"
+                  onClick={() => handleTimeSelect(professional, time)}
                 >
                   {time}
                 </Button>
@@ -46,6 +74,18 @@ export function ProfessionalList({ selectedDate }: ProfessionalListProps) {
           </div>
         ))}
       </div>
+
+      {selectedTime && selectedProfessional && (
+        <div className="mt-8 text-center">
+          <Button 
+            onClick={handleSchedule}
+            className="w-full md:w-auto"
+          >
+            Agendar agora
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
