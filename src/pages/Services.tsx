@@ -37,7 +37,7 @@ export default function Services() {
             <ServiceCard
               title="Corte + Barba"
               price="R$ 70"
-              icon="scissors2"
+              icon="brush"
               isSelected={selectedService === "combo"}
               onClick={() => setSelectedService("combo")}
             />
